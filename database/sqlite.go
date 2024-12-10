@@ -44,7 +44,7 @@ func CloseDB() {
 }
 
 func AutoMigrate() error {
-	err := db.AutoMigrate(&models.Todo{})
+	err := db.AutoMigrate(&models.User{}, &models.Todo{}, &models.Department{}, &models.Shift{})
 	if err != nil {
 		return errors.New("Fehler bei der Datenbank-Migration: " + err.Error())
 	}
