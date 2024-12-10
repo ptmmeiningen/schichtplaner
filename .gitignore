@@ -20,5 +20,5 @@
 # air
 tmp/
 
-# db
-*.db
+# SQLite database
+schichtplaner.db
