@@ -1,6 +1,6 @@
 package models
 
-// APIResponse Standard API Antwortformat für Swagger
+// APIResponse Standard API Antwortformat
 type APIResponse struct {
 	Success bool        `json:"success" example:"true"`
 	Message string      `json:"message,omitempty" example:"Operation erfolgreich"`
