@@ -1,0 +1,25 @@
+basePath: /
+host: localhost:8080
+info:
+  contact:
+    name: Carsten Bröckert
+  description: Golang backend API using Fiber and SQLite
+  license:
+    name: MIT
+  title: Schichtplaner
+  version: "0.1"
+paths:
+  /health:
+    get:
+      consumes:
+      - '*/*'
+      description: get the status of server.
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      summary: Show the status of server.
+      tags:
+      - health
+swagger: "2.0"
