@@ -20,3 +20,5 @@
 # air
 tmp/
 
+# db
+*.db
