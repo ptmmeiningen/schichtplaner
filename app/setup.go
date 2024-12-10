@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/ptmmeiningen/schichtplaner/config"
@@ -24,16 +25,29 @@ func SetupAndRunApp() error {
 		return err
 	}
 
+	// start automigration
+	err = database.AutoMigrate()
+	if err != nil {
+		return err
+	}
+
 	// defer closing database
 	defer database.CloseDB()
 
 	// create app
 	app := fiber.New()
 
-	// attach middleware
+	// attach logger middleware
 	app.Use(recover.New())
 	app.Use(logger.New(logger.Config{
 		Format: "[${ip}]:${port} ${status} - ${method} ${path} ${latency}\n",
+	}))
+
+	// attach CORS middleware
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*", // Erlaubt alle Ursprünge
+		AllowMethods: "GET,POST,PUT,DELETE",
+		AllowHeaders: "Origin,Content-Type,Accept",
 	}))
 
 	// setup routes

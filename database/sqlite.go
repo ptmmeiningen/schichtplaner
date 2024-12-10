@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/glebarez/sqlite"
+	"github.com/ptmmeiningen/schichtplaner/models"
 	"gorm.io/gorm"
 )
 
@@ -40,4 +41,12 @@ func CloseDB() {
 			panic(err)
 		}
 	}
+}
+
+func AutoMigrate() error {
+	err := db.AutoMigrate(&models.Todo{})
+	if err != nil {
+		return errors.New("Fehler bei der Datenbank-Migration: " + err.Error())
+	}
+	return nil
 }
